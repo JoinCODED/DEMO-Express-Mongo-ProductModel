@@ -6,7 +6,6 @@
 - ORMs
 - Sequelize
 - PostgresQL
-- Models
 
 (Add discussion link here)
 
@@ -28,9 +27,9 @@ yarn add sequelize pg pg-hstore
 createdb my_db -U <db_user>
 ```
 
-4. Now let's connect our database with sequelize. Create a folder for all files related to the database called `database`.
+4. Now let's connect our database with sequelize. Create a folder for all files related to the database called `db`.
 
-5. Create a file called `sequelize`. According to [Sequelize's documentation](https://sequelize.org/master/manual/getting-started.html), we will create a sequelize instance and pass it the following parameters:
+5. Create a file called `db` where we will set our database. According to [Sequelize's documentation](https://sequelize.org/master/manual/getting-started.html), we will create a sequelize instance and pass it the following parameters:
 
 ```javascript
 const { Sequelize } = require("sequelize");
@@ -46,30 +45,15 @@ const sequelize = new Sequelize({
 module.exports = sequelize;
 ```
 
-6. The `username` and `password` are the ones we created when installing Postgres, `database` is the name of the database we just created and `dialect` is the type of database we're using which is Postgres.
+6. The `username` and `password` are the ones we created when installing Postgres, `database` is the name of the database we just created and `dialect` is the type of database we're using which is Postgres. Our database instance is ready!
 
-7. Then we will create a database object that we will connect to our express app. Create a file called `index.js`:
-
-```javascript
-const { Sequelize } = require("sequelize");
-
-const sequelize = require("./sequelize");
-
-const db = {
-  sequelize,
-  Sequelize
-};
-
-module.exports = db;
-```
-
-8. Now we will connect the database object to the app and test the connection. In `app.js` require the `db` object:
+7. Now we will connect the database object to the app and test the connection. In `app.js` require the `db` object:
 
 ```javascript
 const db = require("./database");
 ```
 
-9.  To test the connection, we will use the `authenticate` method from `sequelize`. But since this method is asynchronous, we will save it in a function to use `async await`, then call it:
+8. To test the connection, we will use the `authenticate` method from `sequelize`. But since this method is asynchronous, we will save it in a function to use `async await`, then call it:
 
 ```javascript
 const run = async () => {
@@ -80,12 +64,12 @@ const run = async () => {
     console.error("Error connecting to the database: ", error);
   }
 
-  await app.listen(3000, () => {
-    console.log("The application is running on localhost:3000");
+  await app.listen(8000, () => {
+    console.log("The application is running on localhost:8000");
   });
 };
 
 run();
 ```
 
-10. If you get the `Connection to the database successful!` message, then you're ready to move to the next step. You can now remove this code or comment it out.
+9. If you get the `Connection to the database successful!` message, then you're ready to move to the next step. You can now remove this code or comment it out.
