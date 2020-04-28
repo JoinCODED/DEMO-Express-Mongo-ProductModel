@@ -1,51 +1,42 @@
-const cookieMethods = require("../cookieMethods");
+const cookies = require("../cookies");
 
-exports.cookieList = async (req, res) => {
-  try {
-    const cookies = await cookieMethods.getCookies();
-    res.json(cookies);
-  } catch (error) {
-    console.log("Error while fetching cookies", error);
-  }
+exports.cookieCreate = (req, res) => {
+  const id = cookies[cookies.length - 1].id + 1;
+  const newCookie = { id, ...req.body }; //id is equivalent to id: id
+  cookies.push(newCookie);
+  res.status(201).json(newCookie);
 };
 
-exports.cookieDetail = async (req, res) => {
-  try {
-    const { cookieId } = req.params;
-    const cookie = await cookieMethods.getCookie(cookieId);
-    res.json(cookie);
-  } catch (error) {
-    console.log("Error while fetching cookie", error);
-  }
-};
+exports.cookieList = (req, res) => res.json(cookies);
 
-exports.cookieCreate = async (req, res) => {
-  try {
-    const newCookie = await cookieMethods.createCookie(req.body);
-    res.status(201).json(newCookie);
-  } catch (error) {
-    console.log("Error while creating a new cookie", error);
-  }
-};
-
-exports.cookieUpdate = async (req, res) => {
+exports.cookieDetail = (req, res) => {
   const { cookieId } = req.params;
-  try {
-    const foundCookie = await cookieMethods.getCookie(cookieId);
-    let updatedCookie = { ...foundCookie, ...req.body };
-    await cookieMethods.updateCookie(updatedCookie);
-    res.status(204).end();
-  } catch (error) {
-    console.log("Error while updating a cookie!", error);
+  const foundCookie = cookies.find(cookie => cookie.id === +cookieId);
+  if (foundCookie) {
+    res.json(foundCookie);
+  } else {
+    res.status(404).json({ message: "Cookie not found" });
   }
 };
 
-exports.cookieDelete = async (req, res) => {
+exports.cookieUpdate = (req, res) => {
   const { cookieId } = req.params;
-  try {
-    await cookieMethods.deleteCookie(cookieId);
+  const foundCookie = cookies.find(cookie => cookie.id === +cookieId);
+  if (foundCookie) {
+    for (const key in req.body) foundCookie[key] = req.body[key];
     res.status(204).end();
-  } catch (error) {
-    console.log("Error while deleting a cookie!", error);
+  } else {
+    res.status(404).json({ message: "Cookie not found" });
+  }
+};
+
+exports.cookieDelete = (req, res) => {
+  const { cookieId } = req.params;
+  const foundCookie = cookies.find(cookie => cookie.id === +cookieId);
+  if (foundCookie) {
+    cookies = cookies.filter(cookie => cookie.id !== +cookieId);
+    res.status(204).end();
+  } else {
+    res.status(404).json({ message: "Cookie not found" });
   }
 };

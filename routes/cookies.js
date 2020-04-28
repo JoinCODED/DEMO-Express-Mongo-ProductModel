@@ -1,21 +1,27 @@
 const express = require("express");
 const router = express.Router();
 
-const cookieController = require("../controllers/cookieController");
+const {
+  cookieCreate,
+  cookieList,
+  cookieDetail,
+  cookieUpdate,
+  cookieDelete
+} = require("../controllers/cookieController");
 
-// Retrieve cookies list
-router.get("/", cookieController.cookieList);
+// Cookie Create
+router.post("/", cookieCreate);
 
-// Retrieve cookie detail
-router.get("/:cookieId", cookieController.cookieDetail);
+// Cookie List
+router.get("/", cookieList);
 
-// Create a new cookie
-router.post("/", cookieController.cookieCreate);
+// Cookie Detail
+router.get("/:cookieId", cookieDetail);
 
-// Update an existing cookie
-router.put("/:cookieId", cookieController.cookieUpdate);
+// Cookie Update
+router.put("/:cookieId", cookieUpdate);
 
-// Delete an existing cookie
-router.delete("/:cookieId", cookieController.cookieDelete);
+// Cookie Delete
+router.delete("/:cookieId", cookieDelete);
 
 module.exports = router;
