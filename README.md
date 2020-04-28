@@ -50,7 +50,7 @@ module.exports = sequelize;
 7. Now we will connect the database object to the app and test the connection. In `app.js` require the `db` object:
 
 ```javascript
-const db = require("./database");
+const db = require("./db");
 ```
 
 8. To test the connection, we will use the `authenticate` method from `sequelize`. But since this method is asynchronous, we will save it in a function to use `async await`, then call it:
