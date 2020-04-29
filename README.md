@@ -34,7 +34,7 @@ createdb my_db -U <db_user>
 ```javascript
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize({
+const db = new Sequelize({
   username: "postgres",
   password: "password",
   database: "my_db",
@@ -42,7 +42,7 @@ const sequelize = new Sequelize({
   host: "localhost"
 });
 
-module.exports = sequelize;
+module.exports = db;
 ```
 
 6. The `username` and `password` are the ones we created when installing Postgres, `database` is the name of the database we just created and `dialect` is the type of database we're using which is Postgres. Our database instance is ready!
