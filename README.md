@@ -29,7 +29,7 @@ createdb my_db -U <db_user>
 
 4. Now let's connect our database with sequelize. Create a folder for all files related to the database called `db`.
 
-5. Create a file called `db` where we will set our database. According to [Sequelize's documentation](https://sequelize.org/master/manual/getting-started.html), we will create a sequelize instance and pass it the following parameters:
+5. Create a file called `db` where we will set our database. We will create a sequelize instance and pass it the following parameters:
 
 ```javascript
 const { Sequelize } = require("sequelize");
