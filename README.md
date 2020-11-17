@@ -41,7 +41,7 @@ Let's start with installing [Postgresql](https://postgresapp.com/downloads.html)
 1. Back to our Express application, install the following:
 
    ```shell
-   yarn add sequelize pg pg-hstore
+   yarn add sequelize sequelize-cli pg pg-hstore
    ```
 
 2. Now let's connect our database with sequelize. Create a folder for all files related to the database called `db`.
