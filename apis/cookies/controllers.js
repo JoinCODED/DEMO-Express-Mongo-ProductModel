@@ -1,4 +1,5 @@
 let cookies = require("../../cookies");
+const Cookie = require("../../db/models/Cookie");
 
 exports.cookieCreate = (req, res) => {
   const id = cookies[cookies.length - 1].id + 1;
@@ -7,7 +8,14 @@ exports.cookieCreate = (req, res) => {
   res.status(201).json(newCookie);
 };
 
-exports.cookieList = (req, res) => res.json(cookies);
+exports.cookieList = async (req, res) => {
+  try {
+    const cookies = await Cookie.find();
+    res.json(cookies);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 exports.cookieDetail = (req, res) => {
   const { cookieId } = req.params;
