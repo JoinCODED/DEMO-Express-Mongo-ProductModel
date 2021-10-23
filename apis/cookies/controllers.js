@@ -1,4 +1,4 @@
-const cookies = require("../cookies");
+let cookies = require("../../cookies");
 
 exports.cookieCreate = (req, res) => {
   const id = cookies[cookies.length - 1].id + 1;
@@ -11,7 +11,7 @@ exports.cookieList = (req, res) => res.json(cookies);
 
 exports.cookieDetail = (req, res) => {
   const { cookieId } = req.params;
-  const foundCookie = cookies.find(cookie => cookie.id === +cookieId);
+  const foundCookie = cookies.find((cookie) => cookie.id === +cookieId);
   if (foundCookie) {
     res.json(foundCookie);
   } else {
@@ -21,7 +21,7 @@ exports.cookieDetail = (req, res) => {
 
 exports.cookieUpdate = (req, res) => {
   const { cookieId } = req.params;
-  const foundCookie = cookies.find(cookie => cookie.id === +cookieId);
+  const foundCookie = cookies.find((cookie) => cookie.id === +cookieId);
   if (foundCookie) {
     for (const key in req.body) foundCookie[key] = req.body[key];
     res.status(204).end();
@@ -32,9 +32,9 @@ exports.cookieUpdate = (req, res) => {
 
 exports.cookieDelete = (req, res) => {
   const { cookieId } = req.params;
-  const foundCookie = cookies.find(cookie => cookie.id === +cookieId);
+  const foundCookie = cookies.find((cookie) => cookie.id === +cookieId);
   if (foundCookie) {
-    cookies = cookies.filter(cookie => cookie.id !== +cookieId);
+    cookies = cookies.filter((cookie) => cookie.id !== +cookieId);
     res.status(204).end();
   } else {
     res.status(404).json({ message: "Cookie not found" });

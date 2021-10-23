@@ -1,15 +1,18 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+const cors = require("cors");
 
 // Routes
-const cookieRoutes = require("./routes/cookies");
+const cookieRoutes = require("./apis/cookies/routes");
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(cors());
+app.use(express.json());
 
-app.use("/cookies", cookieRoutes);
+app.use("/api/cookies", cookieRoutes);
 
-app.listen(8000, () => {
-  console.log("The application is running on localhost:8000");
-});
+const PORT = 8000;
+
+app.listen(PORT, () =>
+  console.log(`The application is running on localhost:${PORT}`)
+);

@@ -6,8 +6,8 @@ const {
   cookieList,
   cookieDetail,
   cookieUpdate,
-  cookieDelete
-} = require("../controllers/cookieController");
+  cookieDelete,
+} = require("./controllers");
 
 router.post("/", cookieCreate);
 
