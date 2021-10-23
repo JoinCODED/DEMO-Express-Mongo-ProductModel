@@ -1,5 +1,5 @@
 {
-  "name": "ExpressDemo7-ORMandDBSetup",
+  "name": "ExpressDemo7-MongoSetupAndModel",
   "version": "1.0.0",
   "main": "app.js",
   "license": "MIT",
