@@ -73,7 +73,7 @@ You must create a database user to access your cluster. For security purposes, A
 1. Back to our Express application, install `mongoose`.
 
    ```shell
-   yarn add mongoose
+   npm install mongoose
    ```
 
 2. Create a file called **database.js** under the project root.
